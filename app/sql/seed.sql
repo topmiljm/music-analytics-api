@@ -1,6 +1,6 @@
-INSERT INTO users (email, display_name) VALUES
-('alice@example.com', 'Alice'),
-('bob@example.com', 'Bob');
+-- INSERT INTO users (email, password, display_name) VALUES
+-- ('alice@example.com', 'test123', 'Alice'),
+-- ('bob@example.com', 'test123','Bob');
 
 INSERT INTO artists (name) VALUES
 ('Radiohead'),
@@ -26,9 +26,9 @@ INSERT INTO track_genres (track_id, genre_id) VALUES
 (2, 1),
 (3, 2);
 
-INSERT INTO listening_history (user_id, track_id, listen_seconds) VALUES
-(1, 1, 300),
-(1, 1, 200),
-(1, 2, 180),
-(2, 3, 220),
-(2, 3, 210);
+-- INSERT INTO listening_history (user_id, track_id, listen_seconds) VALUES
+-- (1, 1, 300),
+-- (1, 1, 200),
+-- (1, 2, 180),
+-- (2, 3, 220),
+-- (2, 3, 210);

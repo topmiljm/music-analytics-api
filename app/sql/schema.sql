@@ -9,6 +9,7 @@ DROP TABLE IF EXISTS users CASCADE;
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     email TEXT UNIQUE NOT NULL,
+    password TEXT NOT NULL,
     display_name TEXT,
     created_at TIMESTAMP DEFAULT NOW()
 );
@@ -34,7 +35,7 @@ CREATE TABLE tracks (
     id SERIAL PRIMARY KEY,
     title TEXT NOT NULL,
     album_id INT REFERENCES albums(id),
-    duration_seconds INT
+    duration_seconds INT CHECK (duration_seconds > 0)
 );
 
 CREATE TABLE track_genres (
@@ -45,8 +46,8 @@ CREATE TABLE track_genres (
 
 CREATE TABLE listening_history (
     id SERIAL PRIMARY KEY,
-    user_id INT REFERENCES users(id),
-    track_id INT REFERENCES tracks(id),
+    user_id INT REFERENCES users(id) ON DELETE CASCADE,
+    track_id INT REFERENCES tracks(id) ON DELETE CASCADE,
     listened_at TIMESTAMP DEFAULT NOW(),
-    listen_seconds INT NOT NULL
+    listen_seconds INT NOT NULL CHECK (listen_seconds >= 0)
 );

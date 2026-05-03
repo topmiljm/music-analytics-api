@@ -10,8 +10,12 @@ DB_PASSWORD = os.getenv("DB_PASSWORD")
 DB_HOST = os.getenv("DB_HOST")
 DB_PORT = os.getenv("DB_PORT")
 
-def run_sql_file(filename):
-    with open(filename, 'r', encoding='utf-8') as f:
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # ← key line
+
+def run_sql_file(relative_path):
+    full_path = os.path.join(BASE_DIR, relative_path)
+
+    with open(full_path, 'r', encoding='utf-8') as f:
         sql = f.read()
 
     conn = psycopg2.connect(
@@ -26,7 +30,8 @@ def run_sql_file(filename):
     conn.commit()
     cur.close()
     conn.close()
-    print(f"{filename} executed successfully!")
+
+    print(f"{relative_path} executed successfully!")
 
 if __name__ == "__main__":
     run_sql_file("sql/schema.sql")
